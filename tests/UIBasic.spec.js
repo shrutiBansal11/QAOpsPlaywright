@@ -1,6 +1,8 @@
 const {test, expect} = require('@playwright/test');
 const { text } = require('stream/consumers');
 
+test.describe.configure({mode: 'serial'});
+
 test('Playwright browser context test', async ({browser, page})=> 
 {
     
