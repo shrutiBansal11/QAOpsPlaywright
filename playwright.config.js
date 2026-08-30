@@ -14,6 +14,8 @@ import { chromium, defineConfig, devices } from '@playwright/test';
  */
 const config = ({
   testDir: './tests/',
+  //retries: 1,
+  //workers:4,
   timeout:60000, //maximum time one test can run for
   expect : {
     timeout: 50000, //maximum time one assertion can run for
