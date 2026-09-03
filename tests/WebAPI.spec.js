@@ -2,7 +2,7 @@ const { test, expect, request } = require('@playwright/test');
 const {APIUtils}= require('./helpers/APIUtils');
 //const { ok } = require('assert');
 const loginPayload = { userEmail: "Bansal.shruti48@gmail.com", userPassword: "7Sugarleastreet@" };
-const orderPayload = { orders: [{ country: "Cuba", productOrderedId: "6960eac0c941646b7a8b3e68" }] };
+const orderPayload = { orders: [{ country: "India", productOrderedId: "6960eac0c941646b7a8b3e68" }] };
 
 let response;
 
