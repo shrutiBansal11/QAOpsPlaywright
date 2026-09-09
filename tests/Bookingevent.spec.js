@@ -30,6 +30,8 @@ test('Login test', async ({ page }) => {
   await expect(page.getByText("Event Created")).toBeVisible();
 
   await page.locator('#nav-events').click();
+
+  
   const alleventcards = await page.locator("#event-card");
   await expect(alleventcards.first()).toBeVisible();
   const cardnames = await alleventcards.allTextContents();
