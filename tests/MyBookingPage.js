@@ -12,7 +12,7 @@ this.bookingcard = page.locator("#booking-card").first();
 
         await expect(this.page).toHaveURL('/bookings');
         await expect(this.bookingcard).toBeVisible();
-        await this.page.locator("#booking-card").filter({ hasText: this.bookingref }).textContent();
+        await this.bookingcard.filter({ hasText: this.bookingref }).textContent();
 
         await expect(this.bookingcard.filter({ hasText: this.bookingref })).toBeVisible();
         const bookingeventId = await this.page.locator("#booking-card").first().getByText(eventTitle).textContent();

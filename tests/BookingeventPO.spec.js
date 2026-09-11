@@ -1,10 +1,12 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('./LoginPage');
-const { HomePage } = require('./HomePage');
-const { CreateEventPage } = require('./CreateEventPage');
-const { EventsPage} = require('./EventsPage');
- const {BookEventPage} = require('./BookEventPage');
- const{MyBookingPage} = require('./MyBookingPage');
+// const { LoginPage } = require('./LoginPage');
+// const { HomePage } = require('./HomePage');
+// const { CreateEventPage } = require('./CreateEventPage');
+// const { EventsPage} = require('./EventsPage');
+//  const {BookEventPage} = require('./BookEventPage');
+//  const{MyBookingPage} = require('./MyBookingPage');
+const { POManager } = require('./POManager');
+
 
 const { futureDate, futureDateTimeLocal, futureDateObject } = require('./helpers/dateTimeUtils');
 const { selectDateFromCalendar } = require('./helpers/calenderPicker');
@@ -18,36 +20,37 @@ const eventDate = futureDateTimeLocal(96, 'hour');
 
 test('Booking Event', async ({ page }) => {
 //login Page
+const poManager = new POManager(page);
 
-  const loginPage = new LoginPage(page);
+  const loginPage = poManager.getLoginPage();
   await loginPage.gotoLoginPage();
   await loginPage.validLogin(username, password);
   await loginPage.verifyHomePageLoaded();
 
 //home Page
-  const homePage = new HomePage(page);
+  const homePage = poManager.getHomePage();
   await homePage.navigatetoManageEventsPage();
 
 //Create Event Page
-const createEventPage = new CreateEventPage(page);
+const createEventPage = poManager.getCreateEventPage();
 await createEventPage.createNewEvent(eventTitle, eventDate);
 await createEventPage.navigateToEventsPage();
 
 //Events Page
-const eventsPage = new EventsPage(page);
+const eventsPage = poManager.getEventsPage();
 await eventsPage.validateEventDetails(eventTitle);
 const seatsBeforeBooking = await eventsPage.getSeatCount(eventTitle);
 console.log('Before:', seatsBeforeBooking);
 await eventsPage.navigatetoBookEventPage(eventTitle);
 
 //Book Event Page
-const bookEventPage = new BookEventPage(page);
+const bookEventPage = poManager.getBookEventPage();
 await bookEventPage.bookEvent("Shruti Bansal", "bansal.shruti48@gmail.com", "+91 98765 43210");
 const bookingref= await bookEventPage.validateBookingRef();
 console.log(bookingref);
 await bookEventPage.navigateToMyBookingsPage();
 
-const myBookingPage = new MyBookingPage(page, bookingref);
+const myBookingPage = poManager.getMyBookingPage();
 await myBookingPage.validateMyBookingDetails(eventTitle);
 await createEventPage.navigateToEventsPage();
 
