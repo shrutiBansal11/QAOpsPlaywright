@@ -6,25 +6,22 @@ const { test, expect } = require('@playwright/test');
 //  const {BookEventPage} = require('./BookEventPage');
 //  const{MyBookingPage} = require('./MyBookingPage');
 const { POManager } = require('./POManager');
-
-
 const { futureDate, futureDateTimeLocal, futureDateObject } = require('./helpers/dateTimeUtils');
 const { selectDateFromCalendar } = require('./helpers/calenderPicker');
-
-const username = 'bansal.shruti48@gmail.com';
-const password = '7Sugarleastreet@';
+// convert JSON file to sting then JS object.
+const dataset = JSON.parse(JSON.stringify(require('../utils/BookingeventPOdataset.json')));
 const eventTitle = `Test Event ${Date.now()}`;
 const eventDate = futureDateTimeLocal(96, 'hour');
 
 
-
-test('Booking Event', async ({ page }) => {
+for (const data of dataset) {
+test(`Booking Event ${data.username}`, async ({ page }) => {
 //login Page
 const poManager = new POManager(page);
 
   const loginPage = poManager.getLoginPage();
   await loginPage.gotoLoginPage();
-  await loginPage.validLogin(username, password);
+  await loginPage.validLogin(data.username, data.password);
   await loginPage.verifyHomePageLoaded();
 
 //home Page
@@ -67,3 +64,4 @@ expect(seatsAfterBooking).toBe(seatsBeforeBooking - 1);
 
 
 });
+}
