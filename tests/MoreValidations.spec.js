@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { text } = require('stream/consumers');
 
-test('Playwright Special locators', async ({ browser, page }) => {
+test('@Smoke Playwright Special locators', async ({ browser, page }) => {
   //getByLabel locator
   await page.goto("https://rahulshettyacademy.com/angularpractice/");
   await page.getByLabel("Check me out if you Love IceCreams!").click();
@@ -29,7 +29,7 @@ test('Playwright Special locators', async ({ browser, page }) => {
 }
 );
 
-test.only('Screenshot and Visual testing', async ({ browser, page }) => {
+test('@Smoke Screenshot and Visual testing', async ({ browser, page }) => {
 
   await page.goto("https://rahulshettyacademy.com/angularpractice/");
   await page.getByLabel("Check me out if you Love IceCreams!").click();

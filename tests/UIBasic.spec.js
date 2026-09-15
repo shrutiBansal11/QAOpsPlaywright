@@ -3,7 +3,7 @@ const { text } = require('stream/consumers');
 
 test.describe.configure({mode: 'serial'});
 
-test('Playwright browser context test', async ({browser, page})=> 
+test('@Smoke Playwright browser context test', async ({browser, page})=> 
 {
     
 // put Await keyword to execute code in sync and add Async before function. if await is require, ensure async is present.
@@ -25,7 +25,7 @@ console.log(text);
 
 });
 
-test('Playwright page context test', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
+test('@Smoke Playwright page context test', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
 {
 
 await page.goto("https://google.com"); // this open the URL of application
@@ -34,7 +34,7 @@ await expect(page).toHaveTitle("Google");
 
 });
 
-test('Playwright WebUI test', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
+test('@Smoke Playwright WebUI test', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
 {
 const username = page.locator("#username"); // extract id
 const signin  = page.locator("[name='signin']"); // extract css based on attribute
@@ -58,7 +58,7 @@ console.log(cardName);
 
 //priority of timeout
 //Step level> test level> Global level
-test('Playwright UIControl', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
+test('@Smoke Playwright UIControl', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
 {
 const slowexpect = expect.configure({timeout : 9000}); // timeout assertion on test level
 //page.setDefaultTimeout({timeout: 60000}); //timeout test on test level
@@ -92,7 +92,7 @@ await slowexpect(documentLink).toHaveAttribute("class", "blinkingText");
 //page.pause();
 });
 
-test('Playwright Childpage test', async ( {browser})=> // test two open pages
+test('@Smoke Playwright Childpage test', async ( {browser})=> // test two open pages
 {
 const context = await browser.newContext();
 const page = await context.newPage();
@@ -118,7 +118,7 @@ const [newPage]= await Promise.all(
 
 
 
-test('Playwright WebUI test Ecommerce', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
+test('@Smoke Playwright WebUI test Ecommerce', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
 {
 const username = page.locator("#userEmail"); // extract id
 const signin  = page.locator("#login"); // extract css based on attribute

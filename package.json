@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-"test":"npx playwright test tests/WebAPI.spec.js"
+    "test": "npx playwright test tests/WebAPI.spec.js",
+    "SmokeTest": "npx playwright test --grep @Smoke"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.61.0",
-    "@types/node": "^22.13.13"
+    "@types/node": "^22.13.13",
+    "allure-playwright": "^3.12.1"
   },
   "dependencies": {
     "dayjs": "^1.11.21"
