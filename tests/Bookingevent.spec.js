@@ -5,7 +5,7 @@ const { selectDateFromCalendar } = require('./helpers/calenderPicker');
 
 
 
-test('Login test', async ({ page }) => {
+test('@Smoke Login test', async ({ page }) => {
   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
   //await expect(page.getByText("Browse Events →", {exact : true})).toBeVisible();
 

@@ -9,7 +9,7 @@ const yLoginPayload = { email: "test7@ymail.com", password: "Assignment4@" };
 const gLoginPayload = { email: "test8@gmail.com", password: "Assignment4!" };
 //const bookingPayload = { customerName: "test878", customerEmail: "test7@ymail.com", customerPhone: "+918987128680", "…"};
 
-test('Cross-User Booking Access Denied', async ({ request, page, context }) => {
+test('@Progression Cross-User Booking Access Denied', async ({ request, page, context }) => {
 
   //Step 1 — Login as Yahoo user via API  -
   const yLoginResponse = await request.post('https://api.eventhub.rahulshettyacademy.com/api/auth/login', {
@@ -19,6 +19,7 @@ test('Cross-User Booking Access Denied', async ({ request, page, context }) => {
   await expect(yLoginResponse.status()).toBe(200);
   const yLoginResponseJson = await yLoginResponse.json();
   const yToken = await yLoginResponseJson.token;
+  console.log("Yahoo User Token:", yToken);
 
   //Step 2 — Fetch events via API to get a valid event ID
 
@@ -30,7 +31,7 @@ test('Cross-User Booking Access Denied', async ({ request, page, context }) => {
 
   await expect(eventIDResponse.status()).toBe(200);
   const eventIDJson = await eventIDResponse.json();
-  //console.log(eventIDJson);
+  console.log("Event IDs:", eventIDJson);
   const eventId = await eventIDJson.data[0].id;
 
   //Step 3 — Create a booking via API as Yahoo user
@@ -38,10 +39,10 @@ test('Cross-User Booking Access Denied', async ({ request, page, context }) => {
   const bookingResponse = await request.post('https://api.eventhub.rahulshettyacademy.com/api/bookings', {
     data:
     {
-      "eventId": 2,
-      "customerName": "TestBooking8",
+      "eventId": 268,
+      "customerName": "TestBooking100",
       "customerEmail": "test7@ymail.com",
-      "customerPhone": "+91-9876549970",
+      "customerPhone": "+91-9876549679",
       "quantity": 1
     },
     headers: {
@@ -53,7 +54,7 @@ test('Cross-User Booking Access Denied', async ({ request, page, context }) => {
 
   await expect(bookingResponse.status()).toBe(201);
   const bookingResponseJson = await bookingResponse.json();
-  //console.log(bookingResponseJson);
+  console.log(bookingResponseJson);
   const yahooBookingId = await bookingResponseJson.data.id;
 console.log("Yahoo Booking ID:", yahooBookingId);
 //await page.pause();
@@ -63,7 +64,6 @@ console.log("Yahoo Booking ID:", yahooBookingId);
   await login(page, 'test8@gmail.com', 'Assignment4!'); //Login as Gmail user via browser UI
 
   //Step 5 — Navigate to Yahoo's booking URL as Gmail user
-
   await page.goto(`${BASE_URL}/bookings/${yahooBookingId}`);
 
   //Step 6 — Validate Access Denied

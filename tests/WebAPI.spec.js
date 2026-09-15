@@ -14,7 +14,7 @@ response = await apiUtils.createOrder(orderPayload);
 );
 
 
-test('@Web Client App login', async ({ page }) => // .only will only run that test, this is useful while developing tests and unit test are running
+test('@Smoke Client App login', async ({ page }) => // .only will only run that test, this is useful while developing tests and unit test are running
 {
 
  
@@ -44,7 +44,6 @@ test('@Web Client App login', async ({ page }) => // .only will only run that te
     }
     const orderiddetails = await page.locator(".col-text").textContent();
     console.log("Your OrderIdDetails are", orderiddetails);
-    await page.pause();
     await expect(response.orderId.includes(orderiddetails)).toBeTruthy;
 
 
