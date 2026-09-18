@@ -14,8 +14,8 @@ import { chromium, defineConfig, devices } from '@playwright/test';
  */
 const config = ({
   testDir: './tests/',
-  retries: 1,
-  workers:4,
+  //retries: 1,
+  //workers:4,
   timeout:60000, //maximum time one test can run for
   expect : {
     timeout: 50000, //maximum time one assertion can run for
@@ -26,7 +26,7 @@ const config = ({
    //navigationTimeout : 30 * 1000,
     browserName: 'chromium',  //use to define the browser type, webkit- used for safari
     baseURL: 'https://eventhub.rahulshettyacademy.com/login',
-    headless : true,
+    headless : false,
     screenshot : 'on',
     trace : 'on', //traces for all test cases
     //trace : 'retain-on-failure' // traces for failed test cases
