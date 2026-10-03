@@ -5,7 +5,7 @@ const { selectDateFromCalendar } = require('./helpers/calenderPicker');
 
 
 
-test('Login test', async ({ page }) => {
+test('@Smoke Login test', async ({ page }) => {
   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
   //await expect(page.getByText("Browse Events →", {exact : true})).toBeVisible();
 
@@ -30,6 +30,8 @@ test('Login test', async ({ page }) => {
   await expect(page.getByText("Event Created")).toBeVisible();
 
   await page.locator('#nav-events').click();
+
+  
   const alleventcards = await page.locator("#event-card");
   await expect(alleventcards.first()).toBeVisible();
   const cardnames = await alleventcards.allTextContents();

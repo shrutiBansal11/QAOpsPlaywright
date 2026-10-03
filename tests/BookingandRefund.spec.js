@@ -5,12 +5,12 @@ const { login } = require('./helpers/login');
 
 
 
-test('Group ticket booking NOT eligible for refund', async ({ page }) => {
+test('@Progression Group ticket booking NOT eligible for refund', async ({ page }) => {
   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
 
 
   await page.locator('#nav-events').click();
-  await page.locator("#event-card").nth(3).getByTestId('book-now-btn').click();
+  await page.locator("#event-card").nth(1).getByTestId('book-now-btn').click();
 
 
   page.getByRole("button", { name: '+' }).click();
@@ -44,7 +44,7 @@ test('Group ticket booking NOT eligible for refund', async ({ page }) => {
 });
 
 
-test('Single ticket booking eligible for refund', async ({ page }) => {
+test('@Progression Single ticket booking eligible for refund', async ({ page }) => {
   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
 
 

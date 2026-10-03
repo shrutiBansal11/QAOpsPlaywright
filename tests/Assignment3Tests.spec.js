@@ -33,7 +33,7 @@ const FOUR_EVENTS_RESPONSE = {
 
 //Test1
 
-test("Banner IS visible when 6 events are returned", async({page}) =>
+test("@Progression Banner IS visible when 6 events are returned", async({page}) =>
 {
 //Set up the APIMock and Register the Mock
 
@@ -64,7 +64,7 @@ await expect(banner).toContainText("9 bookings");
 
 //Test2
 
-test("Banner is NOT visible when 4 events are returned", async({page}) =>
+test("@Progression Banner is NOT visible when 4 events are returned", async({page}) =>
 {
 //Set up the APIMock and Register the Mock
 

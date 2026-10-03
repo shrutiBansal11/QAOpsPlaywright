@@ -1,7 +1,7 @@
 const {test, expect} = require('@playwright/test');
 const { text } = require('stream/consumers');
 
-test('Playwright Special locators', async ({browser, page})=> 
+test('@Smoke Playwright Special locators', async ({browser, page})=> 
  {
   //getByLabel locator
     await page.goto("https://rahulshettyacademy.com/angularpractice/");

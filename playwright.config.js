@@ -34,5 +34,3 @@ const config = ({
 });
 
 module.exports = config // use these config across all projects
-
-

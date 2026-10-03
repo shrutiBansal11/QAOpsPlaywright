@@ -2,7 +2,7 @@ const {test, expect} = require('@playwright/test');
 const { text } = require('stream/consumers');
 
 
-test('@Web Client App login', async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
+test('@Smoke Client App login',  async ( {page})=> // .only will only run that test, this is useful while developing tests and unit test are running
 {
 const productName = "iphone 13 pro";
 const email="Bansal.shruti48@gmail.com"
