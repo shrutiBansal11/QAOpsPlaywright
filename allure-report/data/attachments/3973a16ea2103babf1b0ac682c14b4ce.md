@@ -1,0 +1,128 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: BookingandRefund.spec.js >> @Smoke Group ticket booking NOT eligible for refund
+- Location: tests/BookingandRefund.spec.js:8:1
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded.
+```
+
+```
+Error: expect(locator).toContainText(expected) failed
+
+Locator: locator('div.bg-white').nth(3).getByTestId('refund-result')
+Expected substring: "Not eligible for refund"
+Received string:    "Eligible for refund. Single-ticket bookings qualify for a full refund."
+
+Call log:
+  - Expect "toContainText" locator('div.bg-white').nth(3).getByTestId('refund-result') with timeout 50000ms
+  - waiting for locator('div.bg-white').nth(3).getByTestId('refund-result')
+    87 × locator resolved to <div id="refund-result" data-testid="refund-result" class="flex items-start gap-2.5 text-sm text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">…</div>
+       - unexpected value "Eligible for refund. Single-ticket bookings qualify for a full refund."
+  - Test timeout of 60000ms exceeded.
+
+```
+
+```yaml
+- img
+- strong: Eligible for refund.
+- text: Single-ticket bookings qualify for a full refund.
+```
+
+# Test source
+
+```ts
+  1  | const { test, expect } = require('@playwright/test');
+  2  | const { login } = require('./helpers/login');
+  3  | //const { futureDate, futureDateTimeLocal, futureDateObject } = require('./helpers/dateTimeUtils');
+  4  | //const { selectDateFromCalendar } = require('./helpers/calenderPicker');
+  5  | 
+  6  | 
+  7  | 
+  8  | test('@Smoke Group ticket booking NOT eligible for refund', async ({ page }) => {
+  9  |   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
+  10 | 
+  11 | 
+  12 |   await page.locator('#nav-events').click();
+  13 |   await page.locator("#event-card").nth(1).getByTestId('book-now-btn').click();
+  14 | 
+  15 | 
+  16 |   page.getByRole("button", { name: '+' }).click();
+  17 |   page.getByRole("button", { name: '+' }).click();
+  18 |   await page.locator("#customerName").fill("Shruti Bansal");
+  19 |   await page.locator("#customer-email").fill("bansal.shruti48@gmail.com");
+  20 |   await page.getByPlaceholder("+91 98765 43210").fill("+91 98765 43210");
+  21 |   await page.getByRole('button', { name: 'Confirm Booking' }).click();
+  22 | 
+  23 | 
+  24 |   await page.getByRole('button', { name: 'View My Bookings' }).click();
+  25 | 
+  26 |   await expect(page).toHaveURL('/bookings');
+  27 | 
+  28 |   await page.locator("#booking-card").first().getByRole('button', { name: 'View Details' }).click();
+  29 |   await expect(page.locator("div.bg-white").last().getByText("Booking Information")).toBeVisible();
+  30 |   const bookingRef = await page.locator("[class*='font-mono font-bold']").textContent();
+  31 |   const eventname = await page.locator("h1.text-2xl.font-bold.text-gray-900").textContent();
+  32 |   expect(bookingRef.trim()[0]).toBe(eventname.trim()[0]);
+  33 | 
+  34 |   //await page.locator("#check-refund-btn").click();
+  35 |   await page.getByTestId('check-refund-btn').click();
+  36 |   await expect(page.locator('#refund-spinner')).toBeVisible({ timeout: 1000 });
+  37 |   await expect(page.locator('#refund-spinner')).toBeHidden({ timeout: 6000 });
+  38 |   const refund = await page.locator("div.bg-white").nth(3).getByTestId('refund-result');
+  39 |   //console.log(refund);
+  40 |   await expect(refund).toBeVisible();
+> 41 |   await expect(refund).toContainText("Not eligible for refund");
+     |                        ^ Error: expect(locator).toContainText(expected) failed
+  42 |   await expect(refund).toContainText("Group bookings (3 tickets) are non-refundable");
+  43 |   //await page.pause();
+  44 | });
+  45 | 
+  46 | 
+  47 | test('@Smoke Single ticket booking eligible for refund', async ({ page }) => {
+  48 |   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
+  49 | 
+  50 | 
+  51 |   await page.locator('#nav-events').click();
+  52 |   await page.locator("#event-card").first().getByTestId('book-now-btn').click();
+  53 | 
+  54 | 
+  55 |   await expect(page.locator("#ticket-count")).toHaveText("1");
+  56 |   await page.locator("#customerName").fill("Shruti Bansal");
+  57 |   await page.locator("#customer-email").fill("bansal.shruti48@gmail.com");
+  58 |   await page.getByPlaceholder("+91 98765 43210").fill("+91 98765 43210");
+  59 |   await page.getByRole('button', { name: 'Confirm Booking' }).click();
+  60 | 
+  61 | 
+  62 |   await page.getByRole('button', { name: 'View My Bookings' }).click();
+  63 | 
+  64 |   await expect(page).toHaveURL('/bookings');
+  65 | 
+  66 |   await page.locator("#booking-card").first().getByRole('button', { name: 'View Details' }).click();
+  67 |   await expect(page.locator("div.bg-white").last().getByText("Booking Information")).toBeVisible();
+  68 |   const bookingRef = await page.locator("[class*='font-mono font-bold']").textContent();
+  69 |   const eventname = await page.locator("h1.text-2xl.font-bold.text-gray-900").textContent();
+  70 |   expect(bookingRef.trim()[0]).toBe(eventname.trim()[0]);
+  71 | 
+  72 |   //await page.locator("#check-refund-btn").click();
+  73 |   await page.getByTestId('check-refund-btn').click();
+  74 |   await expect(page.locator('#refund-spinner')).toBeVisible({ timeout: 1000 });
+  75 |   await expect(page.locator('#refund-spinner')).toBeHidden({ timeout: 6000 });
+  76 |   const refund = await page.locator("div.bg-white").nth(3).getByTestId('refund-result');
+  77 |   //console.log(refund);
+  78 |   await expect(refund).toBeVisible();
+  79 |   await expect(refund).toContainText("Eligible for refund");
+  80 |   await expect(refund).toContainText(" Single-ticket bookings qualify for a full refund.");
+  81 |   //await page.pause();
+  82 | 
+  83 | 
+  84 | });
+```

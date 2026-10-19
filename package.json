@@ -4,16 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-"test":"npx playwright test tests/WebAPI.spec.js"
+    "test:ui": "PLAYWRIGHT_HTML_REPORT=reports/UI playwright test --project=UI",
+    "test:ui-api": "PLAYWRIGHT_HTML_REPORT=reports/UI_API playwright test --project=UI_API",
+    "test:e2e": "PLAYWRIGHT_HTML_REPORT=reports/e2e playwright test --project=e2e",
+    "test:misc": "PLAYWRIGHT_HTML_REPORT=reports/Miscellaneous playwright test --project=Miscellaneous",
+    "report:ui": "playwright show-report reports/UI",
+    "report:ui-api": "playwright show-report reports/UI_API",
+    "report:e2e": "playwright show-report reports/e2e",
+    "report:misc": "playwright show-report reports/Miscellaneous",
+    "test": "npx playwright test tests/WebAPI.spec.js",
+    "SmokeTest": "npx playwright test --grep @Smoke",
+    "CucumberCheckout": "npx cucumber-js --tags '@checkout' --retry 1 --exit --format html:cucumber-report.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@cucumber/cucumber": "^13.2.1",
     "@playwright/test": "^1.61.0",
-    "@types/node": "^22.13.13"
+    "@types/node": "^22.20.4",
+    "allure": "^3.20.0",
+    "allure-cucumberjs": "^3.13.0",
+    "allure-playwright": "^3.12.1",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
-    "dayjs": "^1.11.21"
+    "dayjs": "^1.11.21",
+    "dotenv": "^18.0.2",
+    "exceljs": "^4.4.0"
   }
 }
