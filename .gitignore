@@ -8,3 +8,10 @@ node_modules/
 
 # Playwright
 /playwright/.auth/
+
+# Environment variables / secrets
+.env
+.env.*
+
+/reports/
+
