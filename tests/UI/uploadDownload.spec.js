@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const Excelfile = require('../../utils/ExcelUtil');
 
 // verify is Apple is replaced by Iphone
-test('download upload excel test', async ({ page }) => {
+test('download upload excel test', {tag: ['@flaky']}, async ({ page }) => {
 
     const currentValue = "Apple";
     const newValue = "Iphone";

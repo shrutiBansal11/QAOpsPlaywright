@@ -9,7 +9,7 @@ const yLoginPayload = { email: "test7@ymail.com", password: "Assignment4@" };
 const gLoginPayload = { email: "test8@gmail.com", password: "Assignment4!" };
 //const bookingPayload = { customerName: "test878", customerEmail: "test7@ymail.com", customerPhone: "+918987128680", "…"};
 
-test('@Progression Cross-User Booking Access Denied', async ({ request, page, context }) => {
+test('@Progression Cross-User Booking Access Denied', {tag: ['@flaky']}, async ({ request, page, context }) => {
 
   //Step 1 — Login as Yahoo user via API  -
   const yLoginResponse = await request.post('https://api.eventhub.rahulshettyacademy.com/api/auth/login', {
