@@ -12,27 +12,64 @@ import { chromium, defineConfig, devices } from '@playwright/test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const config = ({
-  testDir: './tests/',
+const config   = ({
+  //testDir: './tests/e2e',
   //retries: 1,
   //workers:4,
   timeout:60000, //maximum time one test can run for
   expect : {
     timeout: 50000, //maximum time one assertion can run for
   },
-  reporter : 'html',
+  reporter : [['html', { open: 'never' }]],
+  projects: [
+    {
+      name: 'UI',
+      testDir: './tests/UI',
+      retries: 1,
+      use: {
+        browserName: 'chromium',  //use to define the browser type, webkit- used for safari
+        headless : false,
+        screenshot : 'only-on-failure',
+        trace: 'on-first-retry' // traces for failed test cases
+      },
+    },
+    {
+      name: 'UI_API',
+      testDir: './tests/UI_API',
+      use: {
+        browserName: 'chromium',
+        headless : false,
+        screenshot : 'only-on-failure',
+        trace : 'retain-on-failure',
+      },
+    },
+    {
+      name: 'e2e',
+      testDir: './tests/e2e',
+      use: {
+        browserName: 'chromium',
+        headless : false,
+        screenshot : 'only-on-failure',
+        trace : 'retain-on-failure',
+      },
+    },
+    {
+      name: 'Miscellaneous',
+      testDir: './tests/Miscellaneous',
+      use: {
+        browserName: 'chromium',
+        headless : false,
+        screenshot : 'only-on-failure',
+        trace : 'retain-on-failure',
+      },
+    },
+  ],
   use: {
     //actionTimeout: 10*1000,
    //navigationTimeout : 30 * 1000,
-    browserName: 'chromium',  //use to define the browser type, webkit- used for safari
     baseURL: 'https://eventhub.rahulshettyacademy.com/login',
-    headless : false,
-    screenshot : 'on',
-    trace : 'on', //traces for all test cases
-    //trace : 'retain-on-failure' // traces for failed test cases
   }
 });
 
+// @ts-ignore
 module.exports = config // use these config across all projects
-
-
