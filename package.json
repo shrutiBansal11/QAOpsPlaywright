@@ -20,17 +20,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@azure/identity": "^4.14.0",
+    "@azure/playwright": "^1.1.6",
     "@cucumber/cucumber": "^13.2.1",
     "@playwright/test": "^1.61.0",
     "@types/node": "^22.20.4",
     "allure": "^3.20.0",
     "allure-cucumberjs": "^3.13.0",
     "allure-playwright": "^3.12.1",
+    "dotenv": "^18.0.9",
     "typescript": "^7.0.2"
   },
   "dependencies": {
     "dayjs": "^1.11.21",
-    "dotenv": "^18.0.2",
     "exceljs": "^4.4.0"
   }
 }
