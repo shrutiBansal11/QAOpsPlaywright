@@ -7,7 +7,8 @@ const { selectDateFromCalendar } = require('../../utils/helpers/calenderPicker')
 
 test('@Smoke Login test', async ({ page }) => {
   await login(page, 'bansal.shruti48@gmail.com', '7Sugarleastreet@');
-  //await expect(page.getByText("Browse Events →", {exact : true})).toBeVisible();
+  //new change on 27/10/2026
+  await expect(page.getByText("Browse Events →", {exact : true})).toBeVisible();
 
   await page.getByRole("button", { name: "Admin" }).click();
   await page.getByRole('navigation').getByRole('link', { name: 'Manage Events' }).click();
