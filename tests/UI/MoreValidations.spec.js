@@ -73,7 +73,7 @@ test('@Smoke Playwright Special locators', async ({ browser, page }) => {
 
 });
 
-test('@Smoke Screenshot and Visual testing', async ({ browser, page }) => {
+test('@Smoke Screenshot and Visual testing', {tag: ['@flaky']}, async ({ browser, page }) => {
 
   await page.goto("https://rahulshettyacademy.com/angularpractice/");
   await page.getByLabel("Check me out if you Love IceCreams!").click();
