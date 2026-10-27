@@ -28,7 +28,7 @@ const config   = ({
       retries: 1,
       use: {
         browserName: 'chromium',  //use to define the browser type, webkit- used for safari
-        headless : false,
+        headless : true,
         screenshot : 'only-on-failure',
         trace: 'on-first-retry' // traces for failed test cases
       },
